@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="otelucusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="amountflights">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="left_capacity" Type="int" />
+  </EntityType>
+  <EntityType Name="amounthotel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="left_capacity" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'otelucus.dbo.customers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="customers">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="surname" />
+      <PropertyRef Name="phone" />
+      <PropertyRef Name="email" />
+      <PropertyRef Name="type_custormer" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="surname" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="type_custormer" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="flights">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="varchar" MaxLength="100" />
+    <Property Name="departure" Type="int" />
+    <Property Name="arrival" Type="int" />
+    <Property Name="capacity" Type="int" />
+    <Property Name="priceperadult" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="priceperchild" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="hotels">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" />
+    <Property Name="location" Type="int" />
+    <Property Name="capacity" Type="int" />
+    <Property Name="priceperadult" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="priceperchild" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="locations">
+    <Key>
+      <PropertyRef Name="code" />
+    </Key>
+    <Property Name="code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reservation_customers">
+    <Key>
+      <PropertyRef Name="customer_id" />
+    </Key>
+    <Property Name="customer_id" Type="int" Nullable="false" />
+    <Property Name="reservation_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reservation_services">
+    <Key>
+      <PropertyRef Name="service_id" />
+    </Key>
+    <Property Name="reservation_id" Type="int" Nullable="false" />
+    <Property Name="service_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reservations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="r_status" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="int" Nullable="false" />
+    <Property Name="begin_date" Type="datetime" Nullable="false" />
+    <Property Name="end_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="roles">
+    <Key>
+      <PropertyRef Name="role_id" />
+    </Key>
+    <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="role_name" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="u_password" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="role_id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__amountflight__id__4B422AD5">
+    <End Role="flights" Type="Self.flights" Multiplicity="1" />
+    <End Role="amountflights" Type="Self.amountflights" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="flights">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="amountflights">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__amounthotel__id__477199F1">
+    <End Role="hotels" Type="Self.hotels" Multiplicity="1" />
+    <End Role="amounthotel" Type="Self.amounthotel" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="hotels">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="amounthotel">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__customers__id__36470DEF">
+    <End Role="reservation_customers" Type="Self.reservation_customers" Multiplicity="1" />
+    <End Role="customers" Type="Self.customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="reservation_customers">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="customers">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__flights__arrival__3A179ED3">
+    <End Role="locations" Type="Self.locations" Multiplicity="0..1" />
+    <End Role="flights" Type="Self.flights" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="locations">
+        <PropertyRef Name="code" />
+      </Principal>
+      <Dependent Role="flights">
+        <PropertyRef Name="arrival" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__flights__departu__39237A9A">
+    <End Role="locations" Type="Self.locations" Multiplicity="0..1" />
+    <End Role="flights" Type="Self.flights" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="locations">
+        <PropertyRef Name="code" />
+      </Principal>
+      <Dependent Role="flights">
+        <PropertyRef Name="departure" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__hotels__location__1D7B6025">
+    <End Role="locations" Type="Self.locations" Multiplicity="0..1" />
+    <End Role="hotels" Type="Self.hotels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="locations">
+        <PropertyRef Name="code" />
+      </Principal>
+      <Dependent Role="hotels">
+        <PropertyRef Name="location" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reservati__creat__681373AD">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="reservations" Type="Self.reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reservations">
+        <PropertyRef Name="created_by" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reservati__reser__2F9A1060">
+    <End Role="reservations" Type="Self.reservations" Multiplicity="1" />
+    <End Role="reservation_customers" Type="Self.reservation_customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="reservations">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reservation_customers">
+        <PropertyRef Name="reservation_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reservati__reser__41B8C09B">
+    <End Role="reservations" Type="Self.reservations" Multiplicity="1" />
+    <End Role="reservation_services" Type="Self.reservation_services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="reservations">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reservation_services">
+        <PropertyRef Name="reservation_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reservati__servi__42ACE4D4">
+    <End Role="hotels" Type="Self.hotels" Multiplicity="1" />
+    <End Role="reservation_services" Type="Self.reservation_services" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="hotels">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reservation_services">
+        <PropertyRef Name="service_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reservati__servi__43A1090D">
+    <End Role="flights" Type="Self.flights" Multiplicity="1" />
+    <End Role="reservation_services" Type="Self.reservation_services" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="flights">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reservation_services">
+        <PropertyRef Name="service_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__users__role_id__6442E2C9">
+    <End Role="roles" Type="Self.roles" Multiplicity="1" />
+    <End Role="users" Type="Self.users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="role_id" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="otelucusModelStoreContainer">
+    <EntitySet Name="amountflights" EntityType="Self.amountflights" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="amounthotel" EntityType="Self.amounthotel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="flights" EntityType="Self.flights" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="hotels" EntityType="Self.hotels" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="locations" EntityType="Self.locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reservation_customers" EntityType="Self.reservation_customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reservation_services" EntityType="Self.reservation_services" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reservations" EntityType="Self.reservations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customers" EntityType="Self.customers" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [customers].[id] AS [id], 
+    [customers].[name] AS [name], 
+    [customers].[surname] AS [surname], 
+    [customers].[phone] AS [phone], 
+    [customers].[email] AS [email], 
+    [customers].[type_custormer] AS [type_custormer]
+    FROM [dbo].[customers] AS [customers]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__amountflight__id__4B422AD5" Association="Self.FK__amountflight__id__4B422AD5">
+      <End Role="flights" EntitySet="flights" />
+      <End Role="amountflights" EntitySet="amountflights" />
+    </AssociationSet>
+    <AssociationSet Name="FK__amounthotel__id__477199F1" Association="Self.FK__amounthotel__id__477199F1">
+      <End Role="hotels" EntitySet="hotels" />
+      <End Role="amounthotel" EntitySet="amounthotel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__customers__id__36470DEF" Association="Self.FK__customers__id__36470DEF">
+      <End Role="reservation_customers" EntitySet="reservation_customers" />
+      <End Role="customers" EntitySet="customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__flights__arrival__3A179ED3" Association="Self.FK__flights__arrival__3A179ED3">
+      <End Role="locations" EntitySet="locations" />
+      <End Role="flights" EntitySet="flights" />
+    </AssociationSet>
+    <AssociationSet Name="FK__flights__departu__39237A9A" Association="Self.FK__flights__departu__39237A9A">
+      <End Role="locations" EntitySet="locations" />
+      <End Role="flights" EntitySet="flights" />
+    </AssociationSet>
+    <AssociationSet Name="FK__hotels__location__1D7B6025" Association="Self.FK__hotels__location__1D7B6025">
+      <End Role="locations" EntitySet="locations" />
+      <End Role="hotels" EntitySet="hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reservati__creat__681373AD" Association="Self.FK__reservati__creat__681373AD">
+      <End Role="users" EntitySet="users" />
+      <End Role="reservations" EntitySet="reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reservati__reser__2F9A1060" Association="Self.FK__reservati__reser__2F9A1060">
+      <End Role="reservations" EntitySet="reservations" />
+      <End Role="reservation_customers" EntitySet="reservation_customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reservati__reser__41B8C09B" Association="Self.FK__reservati__reser__41B8C09B">
+      <End Role="reservations" EntitySet="reservations" />
+      <End Role="reservation_services" EntitySet="reservation_services" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reservati__servi__42ACE4D4" Association="Self.FK__reservati__servi__42ACE4D4">
+      <End Role="hotels" EntitySet="hotels" />
+      <End Role="reservation_services" EntitySet="reservation_services" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reservati__servi__43A1090D" Association="Self.FK__reservati__servi__43A1090D">
+      <End Role="flights" EntitySet="flights" />
+      <End Role="reservation_services" EntitySet="reservation_services" />
+    </AssociationSet>
+    <AssociationSet Name="FK__users__role_id__6442E2C9" Association="Self.FK__users__role_id__6442E2C9">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,179 @@
+﻿@model otelUcusAppProject.Models.servicesModel
+
+@{
+    ViewBag.Title = "servicesCreate";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+ 
+}
+
+<link href="~/style/servicesCreate.css" rel="stylesheet" />
+<fieldset>
+    <legend>
+        Services Create
+    </legend>
+
+    @using (Html.BeginForm("servicesCreate", "ServiceCreate", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.services_type)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.services_type,new { @Value = "", placeholder = "Hotel or Flight",@class = "form-input", @id="Myid",@name ="servis_name",@list="list" })
+                    <datalist id="list">
+                        <option value="Hotel">
+                        <option value="Flight">
+                    </datalist>
+                </td>
+
+            </tr>
+             <tr>
+                <td colspan="2">
+                    @Html.ValidationMessageFor(model => model.services_type, null, new { @class = "text text-danger" })
+                </td>
+            </tr>
+            <tr>
+             <tr>
+                <td>
+                    <label>First, select the service type, then press the button for the appropriate form.</label>
+                </td>
+                <td>
+                    <button type="reset" href="#"  onclick="myFunction()">Changce Form</button>
+                </td>
+
+            </tr>
+          
+            <tr> 
+                <td>
+                    @Html.LabelFor(model => model.services_name)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.services_name)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.ValidationMessageFor(model => model.services_name, null, new { @class = "text text-danger" })
+                </td>
+             </tr>
+             <tr>
+                <td>
+                    @Html.LabelFor(model => model.capacity)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.capacity)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.ValidationMessageFor(model => model.capacity, null, new { @class = "text text-danger" })
+                </td>
+             </tr>
+              <tr>
+                <td>
+                    @Html.LabelFor(model => model.pricePerAdult)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.pricePerAdult, new {@class = "form-input" })
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.ValidationMessageFor(model => model.pricePerAdult, null, new { @class = "text text-danger" })
+                </td>
+            </tr>
+             <tr>
+                <td>
+                    @Html.LabelFor(model => model.pricePerChild)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.pricePerChild, new {@class = "form-input" })
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.ValidationMessageFor(model => model.pricePerChild, null, new { @class = "text text-danger" })
+                </td>
+            </tr>
+             <tr id="hotel1" class="visibility">
+                <td>
+                    @Html.LabelFor(model => model.location)
+                </td>
+                <td>
+                    @Html.DropDownList("code", ViewBag.code as SelectList, "--Select Location--", new {@class ="form-control"})
+                </td>
+            </tr>
+            <tr id="hotel2" class="visibility">
+                <td colspan="2">
+                    @Html.ValidationMessageFor(model => model.location, null, new { @class = "text text-danger" })
+                </td>
+             </tr>
+
+           <tr id="flight1" class="visibility">
+                <td>
+                    @Html.LabelFor(model => model.locationarrivail)
+                </td>
+                <td>
+                    @Html.DropDownList("codeAr", ViewData["code"] as SelectList, "--Select Location--", new {@class ="form-control"})
+                </td>
+            </tr>
+            <tr id="flight12" class="visibility">
+                <td colspan="2">
+                    @Html.ValidationMessageFor(model => model.locationarrivail, null, new { @class = "text text-danger" })
+                </td>
+             </tr>
+              
+            <tr>
+                <td>
+                    <input type="submit" name="name" value="Register" />
+                    <button type="reset" name="name" value="Reset">Reset</button>
+                </td>
+                
+                   
+              
+            </tr>
+
+   
+            
+        </table>
+
+
+    }
+</fieldset>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("Myid").value;
+        var hotels = "Hotel";
+        var dene = "hotel";
+        
+        if (x == dene || x == hotels) {
+            document.getElementById("Myid").defaultValue = "Hotel";
+            document.getElementById("hotel1").style.visibility = "visible";
+            document.getElementById("hotel2").style.visibility = "visible";
+            document.getElementById("flight1").style.visibility = "hidden";
+            document.getElementById("flight2").style.visibility = "hidden";
+            
+        }
+        else if (x == "flight" || x == "Flight") {
+            document.getElementById("Myid").defaultValue = "Flight";
+            document.getElementById("hotel1").style.visibility = "visible";
+            document.getElementById("hotel2").style.visibility = "visible";
+            document.getElementById("flight1").style.visibility = "visible";
+            document.getElementById("flight2").style.visibility = "visible";
+            
+        }
+        else
+        {
+            document.getElementById("Myid").defaultValue = "";
+            document.getElementById("hotel1").style.visibility = "hidden";
+            document.getElementById("hotel2").style.visibility = "hidden";
+            document.getElementById("flight1").style.visibility = "hidden";
+            document.getElementById("flight2").style.visibility = "hidden";
+            
+        }
+    }
+</script>

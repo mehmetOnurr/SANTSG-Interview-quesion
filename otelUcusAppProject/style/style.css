@@ -1,0 +1,21 @@
+﻿body {
+}
+
+    body.backgroundColor {
+        background-color: #8324eeff;
+    }
+
+fieldset.container {
+    width: 250px;
+    height: 230px;
+    top: 50%;
+    left: 40%;
+    position:absolute;
+    margin-top: -50px;
+    margin-left: -50px;
+    padding: 2% 0 2% 0;
+}
+
+legend.paddingLegend{
+    margin-top:3%;
+}

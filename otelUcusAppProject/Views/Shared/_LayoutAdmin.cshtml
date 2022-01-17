@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <link href="~/style/style.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    @*<div class="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-black">
+            <div class="container">
+                <div class="navbar-header">
+                    @Html.ActionLink("User", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            @Html.ActionLink("Home", "Index", "Home", null, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("Contact", "contact", "Home", null, null)
+                        </li>
+                        <li>
+                            @Html.ActionLink("About", "about", "Home", null, null)
+                        </li>
+                    </ul>
+                    @Html.Partial("_loginPartial")
+                </div>
+            </div>
+        </div>*@
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">HotelFlightApp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="~/Home/admin">Home</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="~/location/location">Location Add</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/ServiceCreate/servicesCreate">Hotel and Flight Add</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/SearchAndReservation/searchHotelFlight">Search Hotel and Flights</a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+               
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
